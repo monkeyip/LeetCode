@@ -5,33 +5,35 @@
 #         self.next = None
 
 class Solution:
-    # def reverseList(self, head: ListNode):
+    # def mergeTwoLists(self, l1: ListNode, l2: ListNode):
     #     '''
-    #     递归方法
+    #     递归，效率更高
     #     '''
-    #     if not head or not head.next:
-    #         return head
-    #     # 得到尾部节点
-    #     p = self.reverseList(head.next)
-    #     # 交换当前head 和 head.next
-    #     head.next.next = head # 当前节点的下一节点指向当前节点
-    #     head.next = None # 拆掉当前节点的next
-    #     return p
+    #     if not l1 or not l2:
+    #         return l1 or l2
+    #     if l1.val < l2.val:
+    #         l1.next = self.mergeTwoLists(l1.next, l2)
+    #         return l1
+    #     else:
+    #         l2.next = self.mergeTwoLists(l1, l2.next)
+    #         return l2
 
-    def reverseList(self, head: ListNode):
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode):
         '''
-        循环遍历方法
+        迭代
         '''
-        prev = None
-        while head:
-            curr = head # 当前节点
-            head = head.next # 尾部节点
-            curr.next = prev # 当前节点的下一节点指向反转后的节点
-            prev = curr
-        return prev
-
-# https://www.cnblogs.com/tianqizhi/p/9673894.html
+        dummy = cur = ListNode(0)
+        while l1 and l2:
+            if l1.val < l2.val:
+                cur.next = l1
+                l1 = l1.next
+            else:
+                cur.next = l2
+                l2 = l2.next
+            cur = cur.next
+        cur.next = l1 or l2
+        return dummy.next
 
 if __name__ == "__main__":
     s = Solution()
-    print(s.reverseList())
+    print(s.mergeTwoLists())

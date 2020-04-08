@@ -5,30 +5,32 @@
 #         self.next = None
 
 class Solution:
-    # def hasCycle(self, head: ListNode):
-    #     '''
-    #     利用哈希表记录访问过的节点
-    #     '''
-    #     dic = {}
-    #     while head:
-    #         if dic.get(head,0) != 0: # 如果不在dic中则返回默认值0
-    #             return True
-    #         else:
-    #             dic[head] = 1
-    #         head = head.next
-    #     return False
+    def swapPairs(self, head: ListNode):
+        '''
+        先添加一个空头，再交换，循环解法
+        '''
+        # thead = ListNode(-1)
+        # thead.next = head
+        # c = thead
+        # while c.next and c.next.next:
+        #     a, b = c.next, c.next.next
+        #     c.next, a.next = b, b.next
+        #     b.next = a
+        #     c = c.next.next
+        # return thead.next
 
-    def hasCycle(self, head: ListNode):
+    def swapPairs(self, head: ListNode):
         '''
-        快慢指针
+         from pre -> a -> b -> b.next to pre -> b -> a -> b.next
         '''
-        slow = fast = head
-        while fast and fast.next:
-            fast = fast.next.next
-            slow = slow.next
-            if slow == fast:
-                return True
-        return False
+        pre, pre.next = self, head
+        while pre.next and pre.next.next:
+            a = pre.next
+            b = a.next
+            pre.next, b.next, a.next = b, a, b.next
+            pre = a
+        return self.next
+
 
 if __name__ == "__main__":
     s = Solution()

@@ -1,18 +1,24 @@
 class Solution:
-    def moveZeroes(self, nums):
+    # def merge(self, nums1, m, nums2, n):
+    #     """
+    #     Do not return anything, modify nums1 in-place instead.
+    #     """
+    #     while n > 0:
+    #         if m <= 0 or nums2[n - 1] >= nums1[m - 1]:
+    #             nums1[m + n - 1] = nums2[n - 1]
+    #             n -= 1
+    #         else:
+    #             nums1[m + n - 1] = nums1[m - 1]
+    #             m -= 1
+
+    def merge(self, nums1, m, nums2, n):
         """
-        Do not return anything, modify nums in-place instead.
+        Do not return anything, modify nums1 in-place instead.
+        sort()方法实现
         """
-        # 双指针法：将0和非0元素交换位置
-        if not nums:
-            return 0
-        j = 0
-        for i in range(len(nums)):
-            if nums[i]:
-                nums[i], nums[j] = nums[j], nums[i]
-                j += 1
-        return nums
+        nums1[m:m + n] = nums2
+        nums1.sort()
 
 if __name__ == "__main__":
     s = Solution()
-    print(s.moveZeroes([0,1,0,3,12]))
+    print(s.merge([4,5,6,0,0,0], 3, [1,2,5], 3))

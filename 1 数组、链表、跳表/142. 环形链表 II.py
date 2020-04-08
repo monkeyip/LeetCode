@@ -5,30 +5,25 @@
 #         self.next = None
 
 class Solution:
-    # def hasCycle(self, head: ListNode):
-    #     '''
-    #     利用哈希表记录访问过的节点
-    #     '''
-    #     dic = {}
-    #     while head:
-    #         if dic.get(head,0) != 0: # 如果不在dic中则返回默认值0
-    #             return True
-    #         else:
-    #             dic[head] = 1
-    #         head = head.next
-    #     return False
-
-    def hasCycle(self, head: ListNode):
+    def detectCycle(self, head: ListNode):
         '''
         快慢指针
+        https://leetcode-cn.com/problems/linked-list-cycle-ii/solution/linked-list-cycle-ii-kuai-man-zhi-zhen-shuang-zhi-/
         '''
         slow = fast = head
-        while fast and fast.next:
-            fast = fast.next.next
+        while True:
+            if not fast or not fast.next:
+                return None
             slow = slow.next
+            fast = fast.next.next
             if slow == fast:
-                return True
-        return False
+                break
+        fast = head
+        while fast != slow:
+            fast = fast.next
+            slow = slow.next
+        return fast
+
 
 if __name__ == "__main__":
     s = Solution()

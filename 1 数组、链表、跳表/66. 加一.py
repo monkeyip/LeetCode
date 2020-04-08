@@ -1,23 +1,31 @@
 class Solution:
-    # def merge(self, nums1, m, nums2, n):
-    #     """
-    #     Do not return anything, modify nums1 in-place instead.
-    #     """
-    #     while n > 0:
-    #         if m <= 0 or nums2[n - 1] >= nums1[m - 1]:
-    #             nums1[m + n - 1] = nums2[n - 1]
-    #             n -= 1
-    #         else:
-    #             nums1[m + n - 1] = nums1[m - 1]
-    #             m -= 1
+    # def plusOne(self, digits):
+    #     n = len(digits)
+    #     s = 0
+    #     for i in range(n):
+    #         s += digits[i] * (10**(n-1-i))
+    #     return [int(x) for x in str(s+1)]
 
-    def merge(self, nums1, m, nums2, n):
-        """
-        Do not return anything, modify nums1 in-place instead.
-        sort()方法实现
-        """
-        nums1[m:m + n] = nums2
-        nums1.sort()
+    # def plusOne(self, digits):
+    #     n = len(digits)
+    #     s = 0
+    #     for i in digits:
+    #         s = s * 10 + i
+    #     return [int(x) for x in str(s+1)]
+
+    def plusOne(self, digits):
+        '''
+        从最低位开始做加法运算
+        '''
+        for i in range(len(digits)-1, -1, -1):
+            if digits[i] != 9:
+                digits[i] += 1
+                return digits
+            digits[i] = 0
+        ans = [0] * (len(digits) + 1)
+        ans[0] = 1
+        return ans
+
 
 if __name__ == "__main__":
     s = Solution()
